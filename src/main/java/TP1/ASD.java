@@ -16,22 +16,43 @@ public class ASD {
     }
     
     public String toString() {
-    	String res = "Document[";
+    	String res="";
     	for (Sentence sentence : sentences) {
 			res += sentence.toString()+"\n";
+			res = res.substring(0, res.length() - 1);
+			res += ".";
 		}
-    	res += "]";
     	return res;
     }
     
     public String toNtriples() {
-      return "…";
+    	String res = "";
+    	
+    	String subj;
+    	String verb;
+
+    	for (Sentence sentence : sentences) {
+    		subj = sentence.subject.toString();
+    		
+    		for (RestOfSentence restSente : sentence.listRestSent) {
+				verb = restSente.verb.toString();
+				
+				for (Complement comp : restSente.complements) {
+					res += subj + verb + comp.toString() + ".\n";
+				}
+			}
+		}
+    	
+      return res;
     }
   }//Document
   
   static public class Sentence {
-	  Subject subject;
-	  List<RestOfSentence> listRestSent;
+	  private Subject subject;
+	  private List<RestOfSentence> listRestSent;
+	  
+	  public Subject getSubject() {return subject;}
+	  public List<RestOfSentence> getListRestSent(){return listRestSent;}
 	  
 	  public Sentence(Subject s, List<RestOfSentence> listRos) {
 		  subject = s;
@@ -39,17 +60,18 @@ public class ASD {
 	  }
 	  
 	  public String toString() {
-		  String res = "Sentence["+subject.toString();
+		  String res = subject.toString();
 		  for (RestOfSentence restOfSentence : listRestSent) {
-			res += restOfSentence.toString();
+			res += "\n   " + restOfSentence.toString()+"";
+			res = res.substring(0, res.length() - 1);
+			res += ";";
 		  }
-		  res += "]";
 		  return res;
 	  }
   }//Sentence
   
   static public class Subject {
-	  String subjString;
+	  private String subjString;
 	  
 	  public Subject(String s) {
 		  subjString = "<"+s+">";
@@ -61,8 +83,12 @@ public class ASD {
   }//Subject
   
   static public class RestOfSentence {
-	  Verb verb;
-	  List<Complement> complements;
+	  private Verb verb;
+	  private List<Complement> complements;
+	  
+	  public Verb getVerb() {return verb;}
+	  
+	  public List<Complement> getComplements(){return complements;}
 	  
 	  public RestOfSentence(Verb v, List<Complement> c) {
 		  if(c.size() >= 1) {
@@ -74,17 +100,16 @@ public class ASD {
 	  }
 	  
 	  public String toString() {
-		  String res = "RestOfSentence["+verb.toString();
+		  String res = verb.toString();
 		  for (Complement complement : complements) {
-			res += complement.toString();
+			res += complement.toString()+",";
 		}
-		  res += "]";
 		  return res;
 	  }
   }//RestOfSentence
   
   static public class Verb {
-	  String verbString;
+	  private String verbString;
 	  
 	  public Verb(String v) {
 		  verbString = "<"+v+">";
@@ -100,7 +125,7 @@ public class ASD {
   }//Complement
   
   static public class Ident extends Complement {
-	  String ident;
+	  private String ident;
 	  
 	  public Ident(String id) {
 		  ident = "<"+id+">";
@@ -112,7 +137,7 @@ public class ASD {
   }//Ident
   
   static public class Title extends Complement {
-	  String title;
+	  private String title;
 	  
 	  public Title(String t) {
 		  title = '"'+t+'"';

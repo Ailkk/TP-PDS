@@ -50,7 +50,10 @@ public class Main {
 	listSent.add(sentence);
 	
     ASD.Document ast = new ASD.Document(listSent);
-
+    System.out.println("AST Turtle :");
+    System.out.println(ast.toString());
+    
+    System.out.println("\nAST NTriples :");
     System.out.println(ast.toNtriples());
 
 
