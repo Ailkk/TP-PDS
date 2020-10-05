@@ -1,22 +1,17 @@
 package TP1;
 
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-
-
 import java.io.IOException;
+import java.nio.file.Paths;
 
-/*
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
-*/
+
 
 public class Main {
   public static void main(String[] args) {
     //AST
-	ASD.Subject poly117 = new ASD.Subject("poly117");
+	/*ASD.Subject poly117 = new ASD.Subject("poly117");
 	ASD.Verb type = new ASD.Verb("type");
 	ASD.Verb auteur = new ASD.Verb("auteur");
 	ASD.Verb titre = new ASD.Verb("titre");
@@ -54,11 +49,11 @@ public class Main {
     System.out.println(ast.toString());
     
     System.out.println("\nAST NTriples :");
-    System.out.println(ast.toNtriples());
+    System.out.println(ast.toNtriples());*/
 
 
     // Use with lexer and parser
-    /*
+    
     try {
       // Set input
       CharStream input;
@@ -86,6 +81,6 @@ public class Main {
     } catch(IOException e) {
       e.printStackTrace();
     }
-    */
+    
   }
 }
