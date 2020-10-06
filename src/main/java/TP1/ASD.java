@@ -28,19 +28,8 @@ public class ASD {
     public String toNtriples() {
     	String res = "";
     	
-    	String subj;
-    	String verb;
-
     	for (Sentence sentence : sentences) {
-    		subj = sentence.subject.toString();
-    		
-    		for (RestOfSentence restSente : sentence.listRestSent) {
-				verb = restSente.verb.toString();
-				
-				for (Complement comp : restSente.complements) {
-					res += subj + verb + comp.toString() + ".\n";
-				}
-			}
+    		res += sentence.toNTtriples();
 		}
     	
       return res;
@@ -66,6 +55,14 @@ public class ASD {
 			res = res.substring(0, res.length() - 1);
 			res += ";";
 		  }
+		  return res;
+	  }
+	  
+	  public String toNTtriples() {
+		  String res = "";
+		  for (RestOfSentence restOfSentence : listRestSent) {
+			res += restOfSentence.toNtriples(this.subject);
+		}
 		  return res;
 	  }
   }//Sentence
@@ -106,6 +103,15 @@ public class ASD {
 		}
 		  return res;
 	  }
+	  
+	  public String toNtriples(Subject s) {
+		  String res = "";
+		  
+		  for (Complement complement : complements) {
+			res += complement.toNtriples(s, this.verb);
+		}
+		  return res;
+	  }
   }//RestOfSentence
   
   static public class Verb {
@@ -121,6 +127,8 @@ public class ASD {
   }//Verb
   
   static public abstract class Complement {
+
+	public abstract String toNtriples(Subject s, Verb verb);
 	  
   }//Complement
   
@@ -132,7 +140,12 @@ public class ASD {
 	  }
 	  
 	  public String toString() {
-		  return ident;
+		 return ident;
+	  }
+	  
+	  public String toNtriples(Subject s, Verb v) {
+		  
+		  return s.toString() + v.toString() + this.toString() + ".\n";
 	  }
   }//Ident
   
@@ -145,6 +158,11 @@ public class ASD {
 	  
 	  public String toString() {
 		  return title;
+	  }
+	  
+	  public String toNtriples(Subject s, Verb v) {
+		  
+		  return s.toString() + v.toString() + this.toString() + ".\n";
 	  }
   }//Title
 

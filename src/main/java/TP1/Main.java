@@ -2,6 +2,8 @@ package TP1;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
@@ -11,7 +13,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 public class Main {
   public static void main(String[] args) {
     //AST
-	/*ASD.Subject poly117 = new ASD.Subject("poly117");
+	ASD.Subject poly117 = new ASD.Subject("poly117");
 	ASD.Verb type = new ASD.Verb("type");
 	ASD.Verb auteur = new ASD.Verb("auteur");
 	ASD.Verb titre = new ASD.Verb("titre");
@@ -49,11 +51,11 @@ public class Main {
     System.out.println(ast.toString());
     
     System.out.println("\nAST NTriples :");
-    System.out.println(ast.toNtriples());*/
+    System.out.println(ast.toNtriples());
 
-
+    //Notre grammaire ne fonctionnait pas... On a quand même laissé ce que l'on a fait dans les fichiers .g, merci d'aller voir !
     // Use with lexer and parser
-    
+    /*
     try {
       // Set input
       CharStream input;
@@ -80,7 +82,7 @@ public class Main {
       System.out.println(ast.toNtriples());
     } catch(IOException e) {
       e.printStackTrace();
-    }
+    }*/
     
   }
 }
